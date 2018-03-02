@@ -15,18 +15,11 @@ void insert(node *list, int data)
     temp->data=data;
     temp->next=NULL;
 
-    if(list->next == NULL)
+    while(list->next != NULL)
     {
-        list->next=temp;
+        list=list->next;
     }
-    else
-    {
-        while(list->next != NULL)
-        {
-            list=list->next;
-        }
-        list->next=temp;
-    }
+    list->next=temp;
 }
 
 
@@ -215,19 +208,12 @@ int count(node *list)
 {
     int c=0;
 
-    if(list->next == NULL)
+    while(list->next != NULL)
     {
-        return 0;
+        c++;
+        list=list->next;
     }
-    else
-    {
-        while(list->next != NULL)
-        {
-            c++;
-            list=list->next;
-        }
-        return c;
-    }
+    return c;
 }
 
 
