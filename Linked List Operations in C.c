@@ -66,6 +66,27 @@ void insert_after(node *list, int data)
 }
 
 
+void insert_between(node *list, int data, int new_data)
+{
+    node *temp=(node*)malloc(sizeof(node));
+
+    if(list->next == NULL)
+    {
+        printf("No node found\n");
+    }
+    else
+    {
+        while(list->next->data != data)
+        {
+            list=list->next;
+        }
+        temp->data=new_data;
+        temp->next=list->next->next;
+        list->next->next=temp;
+    }
+}
+
+
 void update(node *list, int data, int new_data)
 {
     node *temp;
@@ -236,6 +257,14 @@ int main()
     printf("\nInsert node after a node: ");
     scanf("%d", &d);
     insert_after(list, d);
+    display(list);
+
+    printf("\nInsert node between nodes");
+    printf("\nSelect the first node: ");
+    scanf("%d", &d);
+    printf("New node data: ");
+    scanf("%d", &n_d);
+    insert_between(list, d, n_d);
     display(list);
 
     printf("\nUpdate node data: ");
