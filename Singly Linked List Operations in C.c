@@ -9,6 +9,14 @@ typedef struct Node
 } node;
 
 
+typedef struct SearchResultNode
+{
+    int isFound;
+    int found;
+    node *pos;
+} s_r_node;
+
+
 void insert(node *list, int data)
 {
     node *temp=(node*)malloc(sizeof(node));
@@ -116,6 +124,47 @@ void del(node *list, int data)
         temp=list->next;
         list->next=list->next->next;
         free(temp);
+    }
+}
+
+
+s_r_node* search(node *list, int data)
+{
+    int pos=0, found=0;
+    s_r_node *res=(s_r_node*)malloc(sizeof(s_r_node));
+    res->isFound=0;
+    res->found=0;
+    res->pos=(node*)malloc(sizeof(node));
+    res->pos->next=NULL;
+
+    if(list->next == NULL)
+    {
+        return res;
+    }
+    else
+    {
+        while(list->next != NULL)
+        {
+            pos++;
+
+            if(list->next->data == data)
+            {
+                found++;
+                insert(res->pos, pos);
+            }
+        }
+
+        if(found > 0)
+        {
+            res->isFound=1;
+            res->found=found;
+
+            return res;
+        }
+        else
+        {
+            return res;
+        }
     }
 }
 
@@ -264,6 +313,16 @@ int main()
     scanf("%d", &d);
     del(list, d);
     display(list);
+
+    printf("\nSearch node: ");
+    scanf("%d", &d);
+    s_r_node *s=search(list, d);
+    if(s->isFound == 1)
+    {
+        printf("\nNode found %d times", s->found);
+        printf("\nDisplaying positions in linked list: ");
+        display(s->pos);
+    }
 
     printf("\nReversed Linked List (Iteration Method)");
     list=iterate(list);
