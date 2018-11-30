@@ -1,4 +1,4 @@
-# datastruct
+# algodatastruct
 Data Structures and Operations, Algorithms..
 
 
